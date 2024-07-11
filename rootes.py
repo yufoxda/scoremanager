@@ -9,5 +9,7 @@ def home():
 @app.route("/searchbook/",methods = ["GET"])
 def searchbook():
   query = request.args.get('query')
-  books = db.session.query(Book).filter(Book.title.contains(query)).all()
-  return render_template('search_results.html', books=books)
+  app.logger.info(query)
+  books = db.session.query(Book).filter(Book.book_name.contains(query)).all()
+  app.logger.info(books)
+  return render_template('search_results.html',books = books)
