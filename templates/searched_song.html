@@ -9,11 +9,11 @@
     </head>
     <body>
         <h1>Search Results</h1>
-        <ul>
+        <ol>
             {% for song in songs %}
-            <li>{{ song.song_name }}</li>
+            <li>{{ song.song_name }} {{ song.created_at }} </li>
             {% endfor %}
-        </ul>
+        </ol>
         <a href="/">Go Back</a>
     </body>
 </html>
