@@ -11,7 +11,7 @@
         <h1>Search Results</h1>
         <ol>
             {% for song in songs %}
-            <li>{{ song.song_name }} {{ song.created_at }} </li>
+            <li>{{ song.song_name }} <a href="/book/{{ song.book_id }}"> {{ song.parent_book.book_name }} </a> </li>
             {% endfor %}
         </ol>
         <a href="/">Go Back</a>

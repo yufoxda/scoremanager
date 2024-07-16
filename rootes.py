@@ -22,7 +22,7 @@ def searchsong():
   app.logger.info(songs)
   return render_template('searched_song.html',songs=songs)
 
-@app.route("/book/<int:id>",methods = ["GET"])
+@app.route("/book/<int:id>")
 def bookinfo(id):
   bookid = id
   songs = db.session.query(Song).filter(Song.book_id.contains(bookid)).all()

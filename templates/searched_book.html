@@ -11,11 +11,11 @@
     <body>
         <div id="app">
         <h1>Search Results</h1>
-        <ul>
+        <ol>
             {% for book in books %}
-            <a href="/book/{{ book.id }}">{{ book.book_name }}</a> {{ book.created_at }}
+            <li><a href="/book/{{ book.id }}">{{ book.book_name }}</a> {{ book.created_at }}</li>
             {% endfor %}
-        </ul>
+        </ol>
         <a href="/">Go Back</a>
         </div>
     </body>
