@@ -1,1 +1,23 @@
-hello
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>テスト</title>
+    </head>
+    <body>
+        <h1>Home</h1>
+        <p>Search form</p>
+        <form method="get" action="/searchsong/">
+            <input type="text" id="query" name="query"/>
+            <button>song Search</button>
+        </form>
+        <form method="get" action="/searchbook/">
+            <input type="text" id="query" name="query"/>
+        </form>
+        <button>book Search</button>
+        <a href="/">Go Back</a>
+    </body>
+</html>

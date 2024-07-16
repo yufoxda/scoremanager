@@ -8,12 +8,14 @@
         <title>テスト</title>
     </head>
     <body>
-        <h1>Search Results</h1>
-        <ol>
+        <h1>book info</h1>
+        <h1>{{ book_name }}</h1>
+        <h2>songs</h2>
+        <ul>
             {% for song in songs %}
-            <li>{{ song.song_name }} {{ song.created_at }} </li>
+            <li>{{ song.song_name }} {{ song.created_at }}</li>
             {% endfor %}
-        </ol>
+        </ul>
         <a href="/">Go Back</a>
     </body>
 </html>
