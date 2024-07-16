@@ -21,3 +21,10 @@ def searchsong():
   songs = db.session.query(Song).filter(Song.song_name.contains(query)).all()
   app.logger.info(songs)
   return render_template('searched_song.html',songs=songs)
+
+@app.route("/book/",methods = ["GET"])
+def bookinfo():
+  bookid = request.args.get('bookid')
+  songs = db.session.query(Song).filter(Song.book_id.contains(bookid)).all()
+  bookname = db.session.query(Book).get(bookid)
+  return render_template('book.html',songs = songs,book_name = bookname.book_name)
