@@ -2,8 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from createSQL import Book, Song, Author, PublishURL
-import requests # type: ignore
-from bs4 import BeautifulSoup # type: ignore
+import requests
+from bs4 import BeautifulSoup
 import re
 
 
@@ -14,16 +14,17 @@ engine = create_engine('sqlite:///onpuscores.db', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-def addbook(bookname):
-    new_book = Book(book_name=bookname, created_at=datetime.now())
-    session.add(new_book)
-    session.flush()
-    while(True):
-        songname = input()
-        if(songname != "None"):
-            addsong(songname,new_book.id)
-        else:
-            return
+url = "https://www.ymm.co.jp/magazine/electone/bn_index.php"
+response = requests.get(url)
+soup = BeautifulSoup(response.content, 'html.parser')
+
+getueleLIST =[]
+
+img = soup.find_all('a',class_ = "bn_img",recursive= True)
+for i in img:
+    getueleLIST.append(i.find('img').get('src')[9:20])
+
+
 
 def addsong(songname,id):
     
@@ -31,13 +32,11 @@ def addsong(songname,id):
     session.add(new_song)
     session.flush()
 
-def commitdata():
-    session.commit()
+for i in getueleLIST:
+    urlgetu = 'https://www.ymm.co.jp/p/detail.php?code='+i
 
-while(True):
     print("月エレ 商品コードを入力")
-    cmd = input()
-    url = 'https://www.ymm.co.jp/p/detail.php?code='+cmd
+    url = urlgetu
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     name = soup.find('span',itemprop="name")
