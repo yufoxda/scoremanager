@@ -76,4 +76,5 @@ except Exception as e:
 
 finally:
     session.close()  # セッションをクローズしてリソースを解放
+
 """
