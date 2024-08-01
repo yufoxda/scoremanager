@@ -13,6 +13,7 @@ class Book(Base):
     __tablename__ = 'books'
     id = Column(Integer, primary_key=True, unique=True)
     book_name = Column(String)
+    product_code =Column(String,nullable= True)
     created_at = Column(DateTime, default=datetime.now, nullable=False)
 
     songs = relationship('Song', back_populates='parent_book')

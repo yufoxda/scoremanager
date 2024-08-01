@@ -2,8 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from createSQL import Book, Song, Author, PublishURL
-import requests
-from bs4 import BeautifulSoup
+import requests# type: ignore
+from bs4 import BeautifulSoup# type: ignore
 import re
 
 
@@ -35,24 +35,23 @@ def addsong(songname,id):
 for i in getueleLIST:
     urlgetu = 'https://www.ymm.co.jp/p/detail.php?code='+i
 
-    print("月エレ 商品コードを入力")
     url = urlgetu
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     name = soup.find('span',itemprop="name")
     a_tag = soup.find_all('a',itemprop="name",recursive= True)
     songlist =[]
-    for i in a_tag:
-        if(i.contents[0][-1] == "/"):
-            songlist.append(i.contents[0][:-1])
+    for j in a_tag:
+        if(j.contents[0][-1] == "/"):
+            songlist.append(j.contents[0][:-1])
         else:
-            songlist.append(i.contents[0])
+            songlist.append(j.contents[0])
     print(songlist)
     print(name.get_text().strip())
     print("OK?")
     if(input() == "y"):
         
-        new_book = Book(book_name=name.get_text().strip(), created_at=datetime.now())
+        new_book = Book(book_name=name.get_text().strip(), created_at=datetime.now(),product_code = i)
         session.add(new_book)
         session.flush()
         for i in songlist:
