@@ -7,18 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>テスト</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='./output.css') }}">
-    </head>
-    <body>
+    
         <!-- hedder -->
-        <nav class="w-full h-14">
-            <div class="mx-auto flex max-w-5xl bg-red-200">
+        <nav class="w-full">
+            <div class="mx-auto flex max-w-6xl relative h-14">
               
-                <img class="object-cover h-14 w-auto" src="{{ url_for('static',filename='./logo.jpg') }}" alt="image description">
-                <h1 class="mx-auto text-3xl font-extrabold p-1">onpoo score manager</h1>
-                <img class="object-cover h-14 w-auto scale-150 -rotate-[15deg]" src="{{ url_for('static',filename='./hedd.png') }}" alt="image description">
+                <img class="object-cover h-full w-auto absolute left-0" src="{{ url_for('static',filename='./logo.jpg') }}" alt="image description">
+                <h1 class="mx-auto flex items-center text-3xl font-extrabold p-1">onpoo score manager</h1>
+                <img class="object-cover  h-full w-auto scale-[1] rotate-[0deg] absolute right-0" src="{{ url_for('static',filename='./25474932.png') }}" alt="image description">
             </div>
         </nav>
-  
+    </head>
+    <body>
         <!-- boddy -->
         <div class="mx-auto max-w-5xl p-10">
         
@@ -26,19 +26,19 @@
             <table class="w-full border-collapse bg-white object-center text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
-                <th scope="col" class="px-6 py-4 font-medium text-gray-900">book name</th>
-                <th scope="col" class="px-6 py-4 font-medium text-gray-900">added date</th>
-                <th scope="col" class="px-6 py-4 font-medium text-gray-900">product code</th>
-                <th scope="col" class="px-6 py-4 font-medium text-gray-900">book ID</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900">book name</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900">added date</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900">product code</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900">book ID</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 border-t border-gray-100">
                 {% for book in books %}
                 <tr class="hover:bg-gray-50">
-                <th class="px-6 py-4 font-medium text-gray-900"><a href="/book/{{ book.id }}">{{ book.book_name }}</a></th>
-                <td class="px-6 py-4">{{ book.created_at }}</td>
-                <td class="px-6 py-4">{{ book.product_code }}</td>
-                <td class="px-6 py-4">{{ book.id }}</td>
+                <th class="px-6 py-4 font-medium  text-blue-500 dark:text-blue-300 hover:underline"><a href="/book/{{ book.id }}">{{ book.book_name }}</a></th>
+                <td class="px-6 py-4 ">{{ book.created_at }}</td>
+                <td class="px-6 py-4 ">{{ book.product_code }}</td>
+                <td class="px-6 py-4 ">{{ book.id }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -6,15 +6,43 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>テスト</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='./output.css') }}">
+    
+        <!-- hedder -->
+        <nav class="w-full">
+            <div class="mx-auto flex max-w-6xl relative h-14">
+              
+                <img class="object-cover h-full w-auto absolute left-0" src="{{ url_for('static',filename='./logo.jpg') }}" alt="image description">
+                <h1 class="mx-auto flex items-center text-3xl font-extrabold p-1">onpoo score manager</h1>
+                <img class="object-cover  h-full w-auto scale-[1] rotate-[0deg] absolute right-0" src="{{ url_for('static',filename='./25474932.png') }}" alt="image description">
+            </div>
+        </nav>
     </head>
     <body>
-        <h1>Search Results</h1>
-        <dl>
-            {% for song in songs %}
-            <dt>{{ song.song_name }} <a href="/book/{{ song.book_id }}"></a>  </dt>
-            <dd>{{ song.parent_book.book_name }}</dd> 
-            {% endfor %}
-        </dl>
+        <div class="mx-auto max-w-5xl p-10">
+        
+            <h2 class="text-2xl font-extrabold dark:text-white p-1">{{ que }} : search result</h2>
+            <table class="w-full border-collapse  bg-white object-center text-left text-sm text-gray-500">
+            <thead class="bg-gray-50">
+                <tr>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900">song name</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900">book name</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900 ">added date</th>
+                <th scope="col" class="px-6 py-4 font-medium  text-gray-900 ">song id</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                {% for song in songs %}
+                <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-medium">{{ song.song_name }}</td>
+                <th class="px-6 py-4 font-medium  text-blue-500 dark:text-blue-300 hover:underline"><a href="/book/{{ song.book_id }}">{{ song.parent_book.book_name }}</a></th>
+                <td class="px-6 py-4 ">{{ song.created_at }}</td>
+                <td class="px-6 py-4 ">{{ song.id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
         <a href="/">Go Back</a>
     </body>
 </html>
