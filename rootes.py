@@ -1,6 +1,7 @@
 from app_init_ import app,db
 from database.createSQL import Book, Song, Author, PublishURL
-from flask import render_template, request
+from flask import render_template, request, url_for
+import os
 
 @app.route("/")
 def home():
@@ -12,7 +13,7 @@ def searchbook():
   app.logger.info(query)
   books = db.session.query(Book).filter(Book.book_name.contains(query)).all()
   app.logger.info(books)
-  return render_template('searched_book.html',books = books)
+  return render_template('searched_book.html',books = books,que = query)
 
 @app.route("/searchsong/",methods = ["GET"])
 def searchsong():
@@ -20,7 +21,7 @@ def searchsong():
   app.logger.info(query)
   songs = db.session.query(Song).filter(Song.song_name.contains(query)).all()
   app.logger.info(songs)
-  return render_template('searched_song.html',songs=songs)
+  return render_template('searched_song.html',songs=songs,que = query)
 
 @app.route("/book/<int:id>")
 def bookinfo(id):
