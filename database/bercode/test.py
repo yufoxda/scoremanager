@@ -59,7 +59,7 @@ while True:
                 time.sleep(0.5)
                 aa(decoded_info)
                 time.sleep(0.5)
-        #cv2.imshow(window_name, frame)
+        cv2.imshow(window_name, frame)
 
     if cv2.waitKey(delay) & 0xFF == ord('q'):
         f.close()
