@@ -28,4 +28,4 @@ def bookinfo(id):
   bookid = id
   songs = db.session.query(Song).filter(Song.book_id == bookid).all()
   bookname = db.session.query(Book).get(bookid)
-  return render_template('book.html',songs = songs,book_name = bookname.book_name)
+  return render_template('book.html',songs = songs,book = bookname)
