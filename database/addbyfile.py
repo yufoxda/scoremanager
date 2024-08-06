@@ -2,8 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from createSQL import Book, Song, Author, PublishURL
-import requests # type: ignore
-from bs4 import BeautifulSoup # type: ignore
+import requests# type: ignore
+from bs4 import BeautifulSoup# type: ignore
 import re
 
 
@@ -14,16 +14,17 @@ engine = create_engine('sqlite:///onpuscores.db', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-def addbook(bookname):
-    new_book = Book(book_name=bookname, created_at=datetime.now())
-    session.add(new_book)
-    session.flush()
-    while(True):
-        songname = input()
-        if(songname != "None"):
-            addsong(songname,new_book.id)
-        else:
-            return
+filename = "./database/bercode/barReadList.txt"
+f = open(filename, 'r')
+
+datalist = f.readlines()
+print(datalist)
+
+table = str.maketrans({
+  '\n': '',
+  ' ': '',
+  '\t': ''
+})
 
 def addsong(songname,id):
     
@@ -31,30 +32,33 @@ def addsong(songname,id):
     session.add(new_song)
     session.flush()
 
-def commitdata():
-    session.commit()
-
-while(True):
-    print("月エレ 商品コードを入力")
-    cmd = input()
-    url = 'https://www.ymm.co.jp/p/detail.php?code='+cmd
+for i in datalist:
+    url = 'https://www.ymm.co.jp/p/detail.php?code='+i.strip()
+    
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     name = soup.find('span',itemprop="name")
     name = re.sub(r"\s", "", name.get_text())
+    aaa =session.query(Book).filter(Book.book_name == name.strip())
+    print(session.query(aaa.exists()).scalar())
+    if(session.query(aaa.exists()).scalar()):
+        print("exist")
+        continue
+    
     a_tag = soup.find_all('a',itemprop="name",recursive= True)
     songlist =[]
-    for i in a_tag:
-        if(i.contents[0][-1] == "/"):
-            songlist.append(i.contents[0][:-1])
+    for j in a_tag:
+        if(j.contents[0][-1] == "/"):
+            songlist.append(j.contents[0][:-1])
         else:
-            songlist.append(i.contents[0])
+            songlist.append(j.contents[0])
     print(songlist)
-    print(name.strip())
+
+    print(name)
     print("OK?")
     if(input() == "y"):
         
-        new_book = Book(book_name=name.strip(), created_at=datetime.now())
+        new_book = Book(book_name=name.strip(), created_at=datetime.now(),product_code = i)
         session.add(new_book)
         session.flush()
         for i in songlist:

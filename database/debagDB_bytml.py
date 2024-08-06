@@ -16,19 +16,19 @@ try:
         print(f"Book ID: {book.id}, Book Name: {book.book_name}")
 
     # 曲のクエリ例
-    songs = session.query(Song).all()
-    for song in songs:
-        print(f"Song ID: {song.id}, Song Name: {song.song_name}, Book ID: {song.book_id}")
+    # songs = session.query(Song).all()
+    # for song in songs:
+    #     print(f"Song ID: {song.id}, Song Name: {song.song_name}, Book ID: {song.book_id}")
 
-    # 著者のクエリ例
-    authors = session.query(Author).all()
-    for author in authors:
-        print(f"Author ID: {author.id}, Author Name: {author.author_name}, Song ID: {author.song_id}")
+    # # 著者のクエリ例
+    # authors = session.query(Author).all()
+    # for author in authors:
+    #     print(f"Author ID: {author.id}, Author Name: {author.author_name}, Song ID: {author.song_id}")
 
-    # 公開URLのクエリ例
-    publish_urls = session.query(PublishURL).all()
-    for publish_url in publish_urls:
-        print(f"Publish URL ID: {publish_url.id}, URL: {publish_url.url}, Song ID: {publish_url.song_id}")
+    # # 公開URLのクエリ例
+    # publish_urls = session.query(PublishURL).all()
+    # for publish_url in publish_urls:
+    #     print(f"Publish URL ID: {publish_url.id}, URL: {publish_url.url}, Song ID: {publish_url.song_id}")
 
 except Exception as e:
     print(f"Error occurred: {e}")

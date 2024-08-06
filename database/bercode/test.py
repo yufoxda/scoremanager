@@ -27,6 +27,7 @@ def aa(codes):
         bb = soup.find('tr',class_="last",recursive= True).find('td').get_text()
         f.write(bb)
         f.write("\n")
+        print(bb)
         winsound.Beep(2000,200)
     except:
         print("err")
